@@ -1,19 +1,15 @@
 #include "encoder_test.hpp"
 
-using std_msgs::Int32;
+using lm4075e_msgs::Int32;
 
 ros::NodeHandle nh;
-Int32 enc_left;
-Int32 enc_right;
-ros::Publisher left_enc_publisher("/enc_left",&enc_left);
-ros::Publisher right_enc_publisher("/enc_right",&enc_right);
-
+Int32 encoder_data;
+ros::Publisher enc_publisher("/encoder_data",&encoder_data);
 
 void setup() {
 
 nh.initNode();
-nh.advertise(left_enc_publisher);
-nh.advertise(right_enc_publisher);
+nh.advertise(enc_publisher);
 
 Serial.begin(115200);
 
@@ -121,11 +117,10 @@ if(LastC == CurrC && LastD != CurrD){
 
   if((current_time-previous_time) > 10)
   {
-  enc_left.data = encoderPosition1;
-  enc_right.data = encoderPosition2;
-  left_enc_publisher.publish(&enc_left);
-  right_enc_publisher.publish(&enc_right);
-  nh.spinOnce();
-  previous_time = current_time;
+    encoder_data.left_pos = encoderPosition1;
+    encoder_data.right_pos = encoderPosition2;
+    enc_publisher.publish(&encoder_data);
+    nh.spinOnce();
+    previous_time = current_time;
   }
 }
