@@ -2,10 +2,10 @@
 #include <lm4075e_msgs/Int32.h>
 #include <Arduino.h>
 
-#define pinA 2
-#define pinB 3
-#define pinC 4
-#define pinD 5
+#define pinA 4
+#define pinB 5
+#define pinC 2
+#define pinD 3
 
 int LastA, LastB;
 int CurrA, CurrB;

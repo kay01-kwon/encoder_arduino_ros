@@ -115,7 +115,7 @@ if(LastC == CurrC && LastD != CurrD){
 **/
   current_time = millis();
 
-  if((current_time-previous_time) > 10)
+  if((current_time-previous_time) >= 20)
   {
     encoder_data.left_pos = encoderPosition1;
     encoder_data.right_pos = encoderPosition2;
